@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile-rabbitmq
     ports:
       - 15000:15672
+  database:
+    image: mongo:latest
   crawler:
     image: trandoshan-io/crawler
     depends_on:
@@ -15,3 +17,8 @@ services:
     image: trandoshan-io/scheduler
     depends_on:
       - rabbitmq
+  persister:
+    image: trandoshan-io/persister
+    depends_on:
+      - rabbitmq
+      - database
