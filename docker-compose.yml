@@ -11,3 +11,7 @@ services:
     image: trandoshan-io/crawler
     depends_on:
       - rabbitmq
+  scheduler:
+    image: trandoshan-io/scheduler
+    depends_on:
+      - rabbitmq
