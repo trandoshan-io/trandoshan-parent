@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: Dockerfile-rabbitmq
+    ports:
+      - 15000:15672
+  crawler:
+    image: trandoshan-io/crawler
+    depends_on:
+      - rabbitmq
