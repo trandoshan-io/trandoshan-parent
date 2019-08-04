@@ -1,24 +1,27 @@
 version: '3'
 
 services:
-  rabbitmq:
-    build:
-      context: .
-      dockerfile: Dockerfile-rabbitmq
-    ports:
-      - 15000:15672
-  database:
-    image: mongo:latest
-  crawler:
-    image: trandoshan-io/crawler
-    depends_on:
-      - rabbitmq
-  scheduler:
-    image: trandoshan-io/scheduler
-    depends_on:
-      - rabbitmq
-  persister:
-    image: trandoshan-io/persister
-    depends_on:
-      - rabbitmq
-      - database
+   rabbitmq:
+      build:
+         context: .
+         dockerfile: Dockerfile-rabbitmq
+      ports:
+         - 15000:15672
+   database:
+      image: mongo:latest
+   crawler:
+      image: trandoshan-io/crawler
+      restart: unless-stopped
+      depends_on:
+         - rabbitmq
+   scheduler:
+      image: trandoshan-io/scheduler
+      restart: unless-stopped
+      depends_on:
+         - rabbitmq
+   persister:
+      image: trandoshan-io/persister
+      restart: unless-stopped
+      depends_on:
+         - rabbitmq
+         - database
