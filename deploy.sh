@@ -11,4 +11,4 @@ while read -r project; do
 done <"projects.txt"
 
 # then bring up using docker-compose
-docker-compose up --build --scale crawler=4 --scale scheduler=2 --scale persister=1
+docker-compose up --build --scale crawler=1 --scale scheduler=1 --scale persister=1
