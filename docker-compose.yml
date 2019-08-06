@@ -9,6 +9,12 @@ services:
          - 15000:15672
    database:
       image: mongo:latest
+   database-ui:
+      image: mongo-express:latest
+      environment:
+         ME_CONFIG_MONGODB_SERVER: database
+      ports:
+        - 15001:8081
    crawler:
       image: trandoshan-io/crawler
       restart: unless-stopped
