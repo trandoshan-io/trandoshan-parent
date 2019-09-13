@@ -7,10 +7,12 @@ services:
          dockerfile: Dockerfile-rabbitmq
       ports:
          - 15000:15672
+   tor-proxy:
+      image: osminogin/tor-simple
    database:
-      image: mongo:latest
+      image: mongo
    database-ui:
-      image: mongo-express:latest
+      image: mongo-express
       environment:
          ME_CONFIG_MONGODB_SERVER: database
       ports:
@@ -20,6 +22,7 @@ services:
       restart: unless-stopped
       depends_on:
          - rabbitmq
+         - tor-proxy
    scheduler:
       image: trandoshan-io/scheduler
       restart: unless-stopped
