@@ -42,3 +42,9 @@ services:
       depends_on:
          - rabbitmq
          - database
+   api:
+      image: trandoshan-io/api
+      restart: unless-stopped
+      depends_on:
+        - database
+        - rabbitmq
