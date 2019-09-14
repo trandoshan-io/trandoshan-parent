@@ -48,3 +48,5 @@ services:
       depends_on:
         - database
         - rabbitmq
+      ports:
+        - 15002:8080
