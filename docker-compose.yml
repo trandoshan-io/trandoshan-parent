@@ -17,6 +17,14 @@ services:
       image: mongo
       logging:
         driver: none
+   database_seeder:
+      build:
+         context: .
+         dockerfile: Dockerfile-mongoseeder
+      logging:
+         driver: none
+      depends_on:
+         - database
    database-ui:
       image: mongo-express
       logging:
@@ -36,6 +44,7 @@ services:
       restart: unless-stopped
       depends_on:
          - rabbitmq
+         - api
    persister:
       image: trandoshan-io/persister
       restart: unless-stopped
