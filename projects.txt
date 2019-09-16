@@ -3,3 +3,4 @@ crawler
 persister
 api
 dashboard
+k8s
