@@ -1,14 +1,10 @@
 version: '3'
 
 services:
-   rabbitmq:
-      build:
-         context: .
-         dockerfile: Dockerfile-rabbitmq
+   messaging-server:
+      image: nats
       logging:
         driver: none
-      ports:
-         - 15000:15672
    tor-proxy:
       image: osminogin/tor-simple
       logging:
@@ -37,25 +33,25 @@ services:
       image: trandoshan-io/crawler
       restart: unless-stopped
       depends_on:
-         - rabbitmq
+         - messaging-server
          - tor-proxy
    scheduler:
       image: trandoshan-io/scheduler
       restart: unless-stopped
       depends_on:
-         - rabbitmq
+         - messaging-server
          - api
    persister:
       image: trandoshan-io/persister
       restart: unless-stopped
       depends_on:
-         - rabbitmq
+         - messaging-server
          - database
    api:
       image: trandoshan-io/api
       restart: unless-stopped
       depends_on:
         - database
-        - rabbitmq
+        - messaging-server
       ports:
         - 15002:8080
