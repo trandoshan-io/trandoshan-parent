@@ -30,7 +30,7 @@ services:
       ports:
         - 15001:8081
    crawler:
-      image: trandoshan-io/crawler
+      image: trandoshanio/crawler
       restart: unless-stopped
       environment:
          - TOR_PROXY=tor-proxy:9050
@@ -39,20 +39,28 @@ services:
          - messaging-server
          - tor-proxy
    scheduler:
-      image: trandoshan-io/scheduler
+      image: trandoshanio/scheduler
       restart: unless-stopped
+      environment:
+         - NATS_URI=nats://derek:pass@messaging-server:4222
+         - API_URI=http://api:8080
       depends_on:
          - messaging-server
          - api
    persister:
-      image: trandoshan-io/persister
+      image: trandoshanio/persister
       restart: unless-stopped
+      environment:
+         - MONGO_URI=mongodb://database:27017
+         - NATS_URI=nats://derek:pass@messaging-server:4222
       depends_on:
          - messaging-server
          - database
    api:
-      image: trandoshan-io/api
+      image: trandoshanio/api
       restart: unless-stopped
+      environment:
+         - MONGO_URI=mongodb://database:27017
       depends_on:
         - database
         - messaging-server
