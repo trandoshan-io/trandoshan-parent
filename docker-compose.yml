@@ -32,6 +32,9 @@ services:
    crawler:
       image: trandoshan-io/crawler
       restart: unless-stopped
+      environment:
+         - TOR_PROXY=tor-proxy:9050
+         - NATS_URI=nats://derek:pass@messaging-server:4222
       depends_on:
          - messaging-server
          - tor-proxy
