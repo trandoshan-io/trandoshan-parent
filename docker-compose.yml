@@ -66,3 +66,11 @@ services:
         - messaging-server
       ports:
         - 15002:8080
+   feeder:
+      image: trandoshanio/feeder
+      restart: never
+      environment:
+         - NATS_URI=nats://derek:pass@messaging-server:4222
+         - INITIAL_URI=something_here
+      depends_on:
+         - messaging-server
