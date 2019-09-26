@@ -13,4 +13,8 @@ When trandoshan is up and running, start a shell in a crawler process
 
 ``docker-compose exec crawler /bin/sh``
 
-Then use the 'feeder' executable to put a url into the todo queue and start the crawling process 
+Then use the 'feeder' executable to put a url into the todo queue and start the crawling process
+
+# How to access the dashboard?
+
+You can access the dashboard at http://localhost:15003
