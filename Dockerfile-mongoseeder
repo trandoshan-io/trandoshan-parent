@@ -1,5 +1,0 @@
-FROM mongo
-
-COPY database /database
-
-CMD mongoimport --host database --db trandoshan --collection forbiddenExtensions --type json --file /database/forbiddenExtensions.json --jsonArray
