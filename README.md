@@ -1,4 +1,4 @@
-# trandoshan-parentINITIAL_URI
+# trandoshan-parent
 
 Parent repository used to centralize tools to run the application, manage source code, ...
 
@@ -12,8 +12,10 @@ the command will pull image from docker hub (https://hub.docker.com/u/trandoshan
 
 ## How to start the dashboard?
 
-As you may notice when running the bootstrap script the dashboard won't goes up
+As you may notice when running the bootstrap script the dashboard won't goes up.
+
 This is indented because the API url use by the dashboard cannot be given at runtime (since angular is a client rendered application)
+
 Therefore you'll have to build your own version of Dashboard with the api url correctly configured
 
 This can be done simply by opening a terminal in the *dashboard* directory and issue the following command:
@@ -31,6 +33,7 @@ You can access the dashboard at http://localhost:15003
 First of all thank you! I'm really happy that people are interested about Trandoshan and I really want to build a little community around the project.
 
 The first thing to do before coding is to build our custom dev version of trandoshan. 
+
 To do this all you have to do is to issue the following command:
 
 ``./build.sh``
@@ -41,4 +44,16 @@ Now, when you will start a local trandoshan instance using the bootstrap script 
 
 # How to start the crawling process?
 
-Just uncomment the line related to the feeder in *docker-compose.yml* file and configure the *INITIAL_URI* env variable to the url you want to crawl
+Just uncomment the following line in *docker-compose.yml* 
+
+```yaml
+#   feeder:
+#      image: trandoshanio/feeder
+#      environment:
+#         - NATS_URI=nats://derek:pass@messaging-server:4222
+#         - INITIAL_URI=something_here
+#      depends_on:
+#         - messaging-server
+```
+
+and configure the *INITIAL_URI* env variable to the url you want to crawl
