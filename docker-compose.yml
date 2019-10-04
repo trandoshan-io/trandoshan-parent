@@ -60,15 +60,15 @@ services:
         - messaging-server
       ports:
         - 15002:8080
-   feeder:
-      image: trandoshanio/feeder
-      environment:
-         - NATS_URI=nats://derek:pass@messaging-server:4222
-         - INITIAL_URI=something_here
-      depends_on:
-         - messaging-server
+#   feeder:
+#      image: trandoshanio/feeder
+#      environment:
+#         - NATS_URI=nats://derek:pass@messaging-server:4222
+#         - INITIAL_URI=something_here
+#      depends_on:
+#         - messaging-server
    dashboard:
-      image: trandoshan-io/dashboard
+      image: trandoshanio/dashboard
       depends_on:
          - api
       ports:
