@@ -21,6 +21,9 @@ cd ../"$1" || (echo "Project: $1 does not exist !" && exit)
 # create the docker image
 docker build . -t "trandoshanio/$1:$2"
 
+# create alias for github packages
+docker tag "trandoshanio/$1:$2" "docker.pkg.github.com/trandoshan-io/$1/$1:$2"
+
 # create the git tag
 git tag "$2"
 
