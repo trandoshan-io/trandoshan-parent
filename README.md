@@ -2,7 +2,11 @@
 
 Parent repository used to centralize tools to run the application, manage source code, ...
 
-# how to boostrap trandoshan locally?
+If you want to clone all projects used by Trandoshan it can be done by issuing the following command:
+
+``./clone.sh``
+
+# how to bootstrap trandoshan locally?
 
 First of all make sure docker is running, then issue the following command:
 
@@ -32,7 +36,7 @@ You can access the dashboard at http://localhost:15003
 
 First of all thank you! I'm really happy that people are interested about Trandoshan and I really want to build a little community around the project.
 
-The first thing to do before coding is to build our custom dev version of trandoshan. 
+The first thing to do before coding is to build your custom dev version of trandoshan. 
 
 To do this all you have to do is to issue the following command:
 
