@@ -43,13 +43,15 @@ services:
          - api
    persister:
       image: trandoshanio/persister
+      volumes:
+        - resources:/resources
       restart: unless-stopped
       environment:
          - MONGO_URI=mongodb://database:27017
          - NATS_URI=nats://derek:pass@messaging-server:4222
+         - STORAGE_PATH=/resources
       depends_on:
          - messaging-server
-         - database
    api:
       image: trandoshanio/api
       restart: unless-stopped
@@ -73,3 +75,6 @@ services:
          - api
       ports:
          - 15003:80
+volumes:
+  resources:
+    driver: local
