@@ -21,6 +21,20 @@ services:
          ME_CONFIG_MONGODB_SERVER: database
       ports:
         - 15001:8081
+   elasticsearch:
+      image: elasticsearch:7.5.1
+      logging:
+         driver: none
+      environment:
+         - discovery.type=single-node
+   kibana:
+      image: kibana:7.5.1
+      logging:
+        driver: none
+      depends_on:
+         - elasticsearch
+      ports:
+         - 15004:5601
    crawler:
       image: trandoshanio/crawler
       restart: unless-stopped
