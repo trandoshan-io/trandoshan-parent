@@ -9,24 +9,13 @@ services:
       image: osminogin/tor-simple
       logging:
         driver: none
-   database:
-      image: mongo
-      logging:
-        driver: none
-   database-ui:
-      image: mongo-express
-      logging:
-        driver: none
-      environment:
-         ME_CONFIG_MONGODB_SERVER: database
-      ports:
-        - 15001:8081
    elasticsearch:
       image: elasticsearch:7.5.1
       logging:
          driver: none
       environment:
          - discovery.type=single-node
+         - JAVA_OPTS=-Xms2g -Xmx2g
    kibana:
       image: kibana:7.5.1
       logging:
@@ -61,19 +50,19 @@ services:
         - resources:/resources
       restart: unless-stopped
       environment:
-         - MONGO_URI=mongodb://database:27017
          - NATS_URI=nats://derek:pass@messaging-server:4222
          - STORAGE_PATH=/resources
+         - ELASTICSEARCH_URL=http://elasticsearch:9200
       depends_on:
          - messaging-server
    api:
       image: trandoshanio/api
       restart: unless-stopped
       environment:
-         - MONGO_URI=mongodb://database:27017
+         - ELASTICSEARCH_URL=http://elasticsearch:9200
       depends_on:
-        - database
-        - messaging-server
+         - elasticsearch
+         - messaging-server
       ports:
         - 15002:8080
 #   feeder:
