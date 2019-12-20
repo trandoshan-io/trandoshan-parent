@@ -41,9 +41,10 @@ services:
       environment:
          - NATS_URI=nats://derek:pass@messaging-server:4222
          - API_URI=http://api:8080
+         - ELASTICSEARCH_URL=http://elasticsearch:9200
       depends_on:
          - messaging-server
-         - api
+         - elasticsearch
    persister:
       image: trandoshanio/persister
       volumes:
@@ -55,6 +56,7 @@ services:
          - ELASTICSEARCH_URL=http://elasticsearch:9200
       depends_on:
          - messaging-server
+         - elasticsearch
    api:
       image: trandoshanio/api
       restart: unless-stopped
